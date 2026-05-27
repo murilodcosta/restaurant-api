@@ -1,4 +1,4 @@
-INSERT INTO tables (number, description, capacity) VALUES
+INSERT INTO restaurant_tables (number, description, capacity) VALUES
 (1, 'Table next to the entrance', 4),
 (2, 'Central table', 4),
 (3, 'Table next to the window', 2),

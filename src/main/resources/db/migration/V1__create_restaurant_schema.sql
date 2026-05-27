@@ -1,4 +1,4 @@
-CREATE TABLE tables (
+CREATE TABLE restaurant_tables (
     id BIGSERIAL PRIMARY KEY,
     number INTEGER NOT NULL UNIQUE,
     description VARCHAR(100),
@@ -30,7 +30,7 @@ CREATE INDEX idx_products_category ON products(category_id);
 
 CREATE TABLE orders (
     id BIGSERIAL PRIMARY KEY,
-    table_id BIGINT NOT NULL REFERENCES tables(id),
+    restaurant_table_id BIGINT NOT NULL REFERENCES restaurant_tables(id),
     opened_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     closed_at TIMESTAMP,
     status VARCHAR(30) NOT NULL DEFAULT 'OPEN',
@@ -38,7 +38,7 @@ CREATE TABLE orders (
     CHECK (status IN ('OPEN', 'IN_PREPARATION', 'READY', 'DELIVERED', 'CLOSED', 'CANCELED'))
 );
 
-CREATE INDEX idx_orders_table ON orders(table_id);
+CREATE INDEX idx_orders_table ON orders(restaurant_table_id);
 CREATE INDEX idx_orders_status ON orders(status);
 CREATE INDEX idx_orders_opened_at ON orders(opened_at);
 
