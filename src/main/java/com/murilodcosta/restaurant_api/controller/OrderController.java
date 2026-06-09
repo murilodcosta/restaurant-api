@@ -1,5 +1,7 @@
 package com.murilodcosta.restaurant_api.controller;
 
+import com.murilodcosta.restaurant_api.dto.OrderItemRequest;
+import com.murilodcosta.restaurant_api.dto.OrderItemResponse;
 import com.murilodcosta.restaurant_api.dto.OrderRequest;
 import com.murilodcosta.restaurant_api.dto.OrderResponse;
 import com.murilodcosta.restaurant_api.service.OrderService;
@@ -7,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/orders")
@@ -32,5 +36,15 @@ public class OrderController {
     @GetMapping("/{id}")
     public OrderResponse findById(@PathVariable Long id) {
         return orderService.findById(id);
+    }
+
+    @PostMapping("/{orderId}/items")
+    public OrderItemResponse addItem(@PathVariable Long orderId, @RequestBody OrderItemRequest orderItemRequest) {
+        return orderService.addItem(orderId, orderItemRequest);
+    }
+
+    @GetMapping("/{orderId}/items")
+    public List<OrderItemResponse> listItems(@PathVariable Long orderId) {
+        return orderService.listItems(orderId);
     }
 }
