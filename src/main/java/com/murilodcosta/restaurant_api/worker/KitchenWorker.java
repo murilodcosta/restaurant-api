@@ -3,6 +3,7 @@ package com.murilodcosta.restaurant_api.worker;
 import com.murilodcosta.restaurant_api.domain.entity.OrderItem;
 import com.murilodcosta.restaurant_api.domain.enums.StatusOrderItem;
 import com.murilodcosta.restaurant_api.repository.OrderItemRepository;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.time.Duration;
@@ -21,6 +22,7 @@ public class KitchenWorker {
         this.orderItemRepository = orderItemRepository;
     }
 
+    @Scheduled(fixedRate =  60000) // 1 minute
     public void checkOverdueItems() {
         List<OrderItem> inPreparationItems = orderItemRepository.findItemsWithProductsAndOrder(StatusOrderItem.IN_PREPARATION);
 
