@@ -6,6 +6,7 @@ import com.murilodcosta.restaurant_api.exception.BusinessRuleException;
 import com.murilodcosta.restaurant_api.repository.OrderItemRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -40,6 +41,7 @@ public class KitchenService {
         }
 
         orderItem.setStatus(StatusOrderItem.IN_PREPARATION);
+        orderItem.setPreparationStartDate(LocalDateTime.now());
 
         var savedOrderItem = orderItemRepository.save(orderItem);
 
@@ -55,6 +57,7 @@ public class KitchenService {
         }
 
         orderItem.setStatus(StatusOrderItem.READY);
+        orderItem.setPreparationEndDate(LocalDateTime.now());
 
         var savedOrderItem = orderItemRepository.save(orderItem);
 
@@ -70,6 +73,7 @@ public class KitchenService {
         }
 
         orderItem.setStatus(StatusOrderItem.DELIVERED);
+        orderItem.setDeliveryDate(LocalDateTime.now());
 
         var savedOrderItem = orderItemRepository.save(orderItem);
 

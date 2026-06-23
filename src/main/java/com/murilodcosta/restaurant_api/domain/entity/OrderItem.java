@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "order_items")
@@ -36,4 +37,13 @@ public class OrderItem {
 
     @Enumerated(EnumType.STRING)
     private StatusOrderItem status = StatusOrderItem.PENDING;
+
+    @Column(name = "preparation_start_date")
+    private LocalDateTime preparationStartDate;
+
+    @Column(name = "preparation_end_date")
+    private LocalDateTime preparationEndDate;
+
+    @Column(name = "delivery_date")
+    private LocalDateTime deliveryDate;
 }
