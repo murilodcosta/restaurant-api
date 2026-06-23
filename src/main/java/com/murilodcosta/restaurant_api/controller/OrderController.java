@@ -5,6 +5,7 @@ import com.murilodcosta.restaurant_api.dto.OrderItemResponse;
 import com.murilodcosta.restaurant_api.dto.OrderRequest;
 import com.murilodcosta.restaurant_api.dto.OrderResponse;
 import com.murilodcosta.restaurant_api.service.OrderService;
+import com.murilodcosta.restaurant_api.service.PaymentService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -17,9 +18,11 @@ import java.util.List;
 public class OrderController {
 
     private final OrderService orderService;
+    private final PaymentService paymentService;
 
-    public OrderController(OrderService orderService) {
+    public OrderController(OrderService orderService, PaymentService paymentService) {
         this.orderService = orderService;
+        this.paymentService = paymentService;
     }
 
     @PostMapping
@@ -46,5 +49,10 @@ public class OrderController {
     @GetMapping("/{orderId}/items")
     public List<OrderItemResponse> listItems(@PathVariable Long orderId) {
         return orderService.listItems(orderId);
+    }
+
+    @PostMapping("{orderId}/pay")
+    public void payOrder(@PathVariable Long orderId, @RequestParam String paymentMethod) {
+        paymentService.processPayment(orderId, paymentMethod);
     }
 }
