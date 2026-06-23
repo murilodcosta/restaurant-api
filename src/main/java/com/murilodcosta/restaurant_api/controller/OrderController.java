@@ -51,7 +51,7 @@ public class OrderController {
         return orderService.listItems(orderId);
     }
 
-    @PostMapping("{orderId}/pay")
+    @PostMapping("/{orderId}/pay")
     public void payOrder(@PathVariable Long orderId, @RequestParam String paymentMethod) {
         paymentService.processPayment(orderId, paymentMethod);
     }
