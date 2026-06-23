@@ -24,9 +24,10 @@ public class Bill {
     private Order order;
 
     private BigDecimal subtotal;
-    @Column(name = "service_fee")
 
+    @Column(name = "service_fee")
     private BigDecimal serviceFee;
+
     private BigDecimal discount;
     private BigDecimal total;
     private LocalDateTime closedAt;
